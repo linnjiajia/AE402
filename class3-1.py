@@ -4,7 +4,6 @@
 """
 # 匯入pygame模組
 import pygame
-import random
 
 # 定義一些會用到的顏色
 # 常數使用大寫
@@ -12,8 +11,6 @@ BLACK    = (   0,   0,   0)
 WHITE    = ( 255, 255, 255)
 GREEN    = (   0, 255,   0)
 RED      = ( 255,   0,   0)
-BLUE    = ( 0,   0,   255)
-
 
 # 初始化pygame
 pygame.init()
@@ -22,51 +19,51 @@ pygame.init()
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("好棒棒")
+pygame.display.set_caption("好棒棒遊戲")
 
 # 設定一個開關供迴圈使用
 done = False
 
 # 創造一個clock控制畫面更新速度
 clock = pygame.time.Clock()
+x = 0
+y = 0
+        
 
-snow = []
-for j in range(12):
-    x = random.randrange(700)
-    y = random.randrange(100)
-    snow.append([x,y])
-
+        
 # -------- 主要的程式迴圈 -----------
 while not done:
     # --- 事件迴圈 event loop
     for event in pygame.event.get(): # 從事件list中抓取事件
         if event.type == pygame.QUIT: # 當使用者按下結束
-            done = True # 將done變數設為True-->while迴圈將會結束
-
-    # --- 程式的運算與邏輯
-    
-
+            done = True
+        elif event.type == pygame.KEYDOWN:
+            print("KEYDOWN")
+            
+            # 將done變數設為True-->while迴圈將會結束
     # --- 繪圖的程式碼
     #       先將畫面塗滿底色(將原有畫面清掉)
     #       繪圖的程式要寫在這行後面，不然會被這行清掉
-    screen.fill(BLACK)
     
-    for j in range(12):
-        pygame.draw.circle(screen, WHITE, (snow[j][0],snow[j][1]), 10)
-        snow[j][1] += 1
-        if snow[j][1] == 500:
-            snow[j][1] = 0
-            snow[j][0] = random.randrange(700)
-        
-        
-
-
     
+    screen.fill(WHITE)
+# --- 程式的運算與邏輯
+    key =pygame.key.get_pressed()
+    if key[pygame.K_LEFT]:
+        x -= 1
+    if key[pygame.K_RIGHT]:
+        x += 1
+    if key[pygame.K_DOWN]:
+        y += 1
+    if key[pygame.K_UP]:
+        y -= 1
+        
+    pygame.draw.rect(screen, BLACK, [x,y,30, 30])
     # --- 更新畫面
     pygame.display.flip()
 
-    # --- 每秒鐘180個frame
-    clock.tick(180)
+    # --- 每秒鐘60個frame
+    clock.tick(300)
 
 # 關閉式窗並離開程式
 pygame.quit()
