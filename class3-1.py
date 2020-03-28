@@ -4,6 +4,7 @@
 """
 # 匯入pygame模組
 import pygame
+import random
 
 # 定義一些會用到的顏色
 # 常數使用大寫
