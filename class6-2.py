@@ -12,29 +12,30 @@ class Animal:
         self.HP -= demage
         print("剩下血量:" + str(self.HP))
         
-class Dog(Animal):
+class cat(Animal):
     def __init__(self,HP):
         super().__init__(HP)
         
     def howl(self):
-        print("汪汪汪")
+        print("喵")
         
         
-class ShibaInu(Dog):
+class Persiancat(cat):
     def __init__(self):
         super().__init__(1)
     
     def howl(self):
         print("阿囉哈")
         
-class WelshCorgi(Dog):
+class Bengalcat(cat):
     def __init__(self):
         super().__init__(1)
         
     def howl(self):
         print("呱呱呱")
         
-a = WelshCorgi()
+a = Persiancat
+b = Bengalcat
         
     
 
